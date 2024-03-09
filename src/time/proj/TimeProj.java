@@ -4,20 +4,16 @@
  */
 package time.proj;
 
-import com.sun.source.tree.BreakTree;
-import java.nio.file.FileSystemNotFoundException;
+
+
 import java.util.Scanner;
 import java.math.BigInteger;
+import java.io.File;
+import java.io.FileWriter;
 
-/**
- *
- * @author Administrator
- */
 public class TimeProj {
 
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String[] args) {
         
         String newLine = System.lineSeparator();
@@ -366,10 +362,70 @@ public class TimeProj {
         else 
             { 
             taxDeduct = 0; 
-            System.out.println("Withholding Tax is: 0");
+            System.out.println("Withholding Tax is: " + taxDeduct);
             }
         float netWkPay = (taxablePay-taxDeduct);
         System.out.println("Net Pay for this week is: " + netWkPay);
+        
+        
+        //new File and File Writer
+        
+        //Creating New File
+        File file = new File("employeeSalaryInfo.txt");
+        
+        try
+        {
+            boolean value = file.createNewFile();
+            if(value)
+            {
+                System.out.println("New Employee and Salary Information File created");
+            }
+            else
+            {
+                System.out.println("Employee and Salary Information File already exist");
+            }
+        }
+        catch(Exception e)
+        {
+           e.getStackTrace();
+        }
+        
+        
+       //Writing Employee information and Salary info in the File
+        try 
+        {
+            FileWriter output = new FileWriter("employeeSalaryInfo.txt");
+            output.write("EMPLOYEE INFORMATION" + "\n");
+            output.write("Employee #: " + employeeNum + "\n");
+            output.write("Last Name: " + lastName + "\n");
+            output.write("First Name: " + firstName + "\n");
+            output.write(newLine);
+            output.write("DAY1 DATE: " + date1 + "\n");
+            output.write("Time In: " + startHr1 + ":" + startMin1 + "\n");
+            output.write("Time Out: " + endHr1 + ":" + endMin1 + "\n");
+            output.write("Total HOURS DAY1 : " + totalDayHr1 + "\n");
+            output.write("DAY2 DATE: " + date2 + "\n");
+            output.write("Time In: " + startHr2 + ":" + startMin2 + "\n");
+            output.write("Time Out: " + endHr2 + ":" + endMin2 + "\n");
+            output.write("Total HOURS DAY2 : " + totalDayHr2 + "\n");
+            output.write("TOTAL HOURS for the WEEK : " + totalWkHrs + "\n");
+            output.write(newLine);
+            output.write("TOTAL HOURS for the WEEK : " + totalWkHrs + "\n");
+            output.write("Per Hour Rate: " + prHr + "\n");
+            output.write("Gross Pay for this Week : " + grossWkPay + "\n");            
+            output.write("SSS Contribution is: " + sssDeduct + "\n");
+            output.write("Phil Health Contribution is: " + phDeduct + "\n");
+            output.write("PagIbig Contribution is: " + pagIbigDeduct + "\n");
+            output.write("less TOTAL CONTRIBUTIONS " + lessDeduct + "\n");
+            output.write("Taxable Income is " + taxablePay + "\n");
+            output.write("Withholding Tax is: " + taxDeduct + "\n");
+            output.write("Net Pay for this week is: " + netWkPay + "\n");
+            
+        } 
+        catch (Exception e) 
+        {
+            e.getStackTrace();
+        }
     }
     
 }
