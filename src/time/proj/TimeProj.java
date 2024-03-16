@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
+
 package time.proj;
 
 
@@ -11,10 +8,10 @@ import java.math.BigInteger;
 import java.io.File;
 import java.io.FileWriter;
 
-public class TimeProj {
+public class TimeProj{
 
     
-    public static void main(String[] args) {
+    public static void main(String[] args){
         
         String newLine = System.lineSeparator();
         Scanner input = new Scanner(System.in);
@@ -33,12 +30,28 @@ public class TimeProj {
         String date1 = input.next();
         System.out.println("Time In Hour of Day 1: ");
         int startHr1 = input.nextInt();
+        while(startHr1>=24){
+            System.out.println("Invlaid Hour Input, please re-enter Time In Hour: ");
+            startHr1 = input.nextInt();
+        }
         System.out.println("Minute: ");
         int startMin1 = input.nextInt();
+        while(startMin1>=60){
+            System.out.println("Invalid Minute Input, please re-enter Time In Minutes: ");
+            startMin1 = input.nextInt();
+        }
         System.out.println("Time End Hour of Day 1: ");
         int endHr1 = input.nextInt();
+        while(endHr1>=24){
+            System.out.println("Invlaid Hour Input, please re-enter Time End Hour: ");
+            endHr1 = input.nextInt();
+        }    
         System.out.println("Minute: ");
         int endMin1 = input.nextInt();
+        while(endMin1>=60){
+            System.out.println("Invalid Minute Input, please re-enter Time End Minutes: ");
+            endMin1 = input.nextInt();
+        }
         
         //salary deduction condition
         int totalDayHr1 = ((startHr1 == 8) && (startMin1 >= 11))?((endHr1 - startHr1) - 1) : (endHr1-startHr1);    
@@ -48,12 +61,28 @@ public class TimeProj {
         String date2 = input.next();
         System.out.println("Time In Hour of Day 2: ");
         int startHr2 = input.nextInt();
+        while(startHr2>=24){
+            System.out.println("Invlaid Hour Input, please re-enter Time In Hour: ");
+            startHr2 = input.nextInt();
+        }
         System.out.println("Minute: ");
         int startMin2 = input.nextInt();
+        while(startMin2>=60){
+            System.out.println("Invalid Minute Input, please re-enter Time In Minutes: ");
+            startMin2 = input.nextInt();
+        }
         System.out.println("Time End Hour of Day 2: ");
         int endHr2 = input.nextInt();
+        while(endHr2>=24){
+            System.out.println("Invlaid Hour Input, please re-enter Time End Hour: ");
+            endHr2 = input.nextInt();
+        }    
         System.out.println("Minute: ");
         int endMin2 = input.nextInt();
+        while(endMin2>=60){
+            System.out.println("Invalid Minute Input, please re-enter Time End Minutes: ");
+            endMin2 = input.nextInt();
+        }
         
         //salary deduction condition
         int totalDayHr2 = ((startHr2 == 8) && (startMin2 >= 11))?((endHr2 - startHr2) - 1) : (endHr2-startHr2);                 
@@ -322,27 +351,23 @@ public class TimeProj {
             
         //Pag Ibig Contribution (EMPLOYEE SHARE MISSING!!)
         float employeePagibig;
-        if (grossWkPay<1000) 
-            { 
+        if (grossWkPay<1000){ 
             employeePagibig = (grossWkPay*0.01f);
-            }
-        else if (grossWkPay>=1000 && grossWkPay<=1500) 
-            {
+        }
+        else if (grossWkPay>=1000 && grossWkPay<=1500){
             employeePagibig = (grossWkPay*0.01f);
-            }
-        else if (grossWkPay>1500) 
-            {
+        }
+        else if (grossWkPay>1500){
             employeePagibig = (grossWkPay*0.02f);
-            }
-        else 
-            { 
+        }
+        else{ 
             employeePagibig = (grossWkPay*0.02f); 
-            }
+        }
         float pagIbigDeduct = employeePagibig;
-        if (employeePagibig>100) 
-            {         //maximum of 100 only contribution
+        if (employeePagibig>100){         
+            //maximum of 100 only contribution
             pagIbigDeduct = 100;
-            }
+        }
         System.out.println("PagIbig Contribution is: " + pagIbigDeduct);
         
         //Gross Weekly pay less Contributions
@@ -354,16 +379,15 @@ public class TimeProj {
         
         //total Net Weekly Pay
         float taxDeduct;
-        if (taxablePay>20833) 
-            {  //DIVIDE BY 4 if WEEKLY???
+        if (taxablePay>20833){  
+            //DIVIDE BY 4 if WEEKLY???
             taxDeduct = ((taxablePay-20833)*0.20f); //condition for above 20833 monthly
             System.out.println("Withholding Tax is: " + taxDeduct);
-            }
-        else 
-            { 
+        }
+        else{ 
             taxDeduct = 0; 
             System.out.println("Withholding Tax is: " + taxDeduct);
-            }
+        }
         float netWkPay = (taxablePay-taxDeduct);
         System.out.println("Net Pay for this week is: " + netWkPay);
         
@@ -373,27 +397,21 @@ public class TimeProj {
         //Creating New File
         File file = new File("employeeSalaryInfo.txt");
         
-        try
-        {
+        try{
             boolean value = file.createNewFile();
-            if(value)
-            {
+            if(value){
                 System.out.println("New Employee and Salary Information File created");
             }
-            else
-            {
-                System.out.println("Employee and Salary Information File already exist");
+            else{
+                System.out.println("Employee and Salary Information File already exists and have been updated.");
             }
         }
-        catch(Exception e)
-        {
+        catch(Exception e){
            e.getStackTrace();
-        }
-        
+        }        
         
        //Writing Employee information and Salary info in the File
-        try 
-        {
+        try{
             FileWriter output = new FileWriter("employeeSalaryInfo.txt");
             output.write("EMPLOYEE INFORMATION" + "\n");
             output.write("Employee #: " + employeeNum + "\n");
@@ -418,12 +436,12 @@ public class TimeProj {
             output.write("PagIbig Contribution is: " + pagIbigDeduct + "\n");
             output.write("less TOTAL CONTRIBUTIONS " + lessDeduct + "\n");
             output.write("Taxable Income is " + taxablePay + "\n");
+            output.write(newLine);
             output.write("Withholding Tax is: " + taxDeduct + "\n");
             output.write("Net Pay for this week is: " + netWkPay + "\n");
-            
+            output.close();            
         } 
-        catch (Exception e) 
-        {
+        catch (Exception e){
             e.getStackTrace();
         }
     }
